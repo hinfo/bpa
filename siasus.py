@@ -5,9 +5,9 @@ from datetime import date
 
 url = "ftp://arpoador.datasus.gov.br/siasus/sia/"
 hj = date.today()
-m = str(hj.month -1)
+m = str(hj.month)
 y = str(hj.year)
-text = "BDSIA"+y+"0"+m+"b.exe"
+text = "BDSIA"+y+"0"+m+"a.exe"
 
 count = 0
 versao = url+text
