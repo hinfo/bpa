@@ -19,12 +19,11 @@ try:
 		if text in line:
 			count = count+1 
 			print line
-		
+
 except:
 	print 35*"x"
 	print '---ERRO NA ABERTURA DA PAGINA---'
 	print 35*"x"
-	
 
 
 #print count #//checkpoint
