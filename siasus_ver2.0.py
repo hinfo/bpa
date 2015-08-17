@@ -16,7 +16,7 @@ from datetime import date
 url = 'ftp://arpoador.datasus.gov.br/siasus/sia/'
 url2 ='ftp://arpoador.datasus.gov.br/siasus/bpa/'  
 hj = date.today()
-m = str(hj.month - 1)
+m = str(hj.month)
 y = str(hj.year)
 
 
@@ -39,7 +39,7 @@ if erro == 0:
 	#checkppoint
 	#print html 
 	remove = [z.strip() for z in html]
-	bdsia = str(remove[91]) # trocar para buscar o arquivo correto sempre 
+	bdsia = str(remove[94]) # trocar para buscar o arquivo correto sempre 
 	ver = bdsia[-16:]
 	print "Buscando versao: "+ver
 	print "Arquivo encontrado!"
