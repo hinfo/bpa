@@ -21,5 +21,5 @@ for linha in pagina:
 pagina.close()
 arq = url+nome
 print "Baixando arquivo %s." %nome
-urllib.urlretrieve(arq,nome)
+download = urllib.urlretrieve(arq,nome)
 print "Download Concluído"
