@@ -1,25 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Script para download arquivo bpa magnético
-# Author: H. Antunes
-# Ano: 2016
-# Revisao: 1.0 
-#
 
-import urllib
-url = "ftp://arpoador.datasus.gov.br/siasus/BPA/"
+import urllib.request
 
-pagina = urllib.urlopen(url)
+if __name__ == "__main__":
 
-for linha in pagina:
-	if linha.find("exe")!= -1:
-		tmp = linha.split()
-		nome = tmp[3]
-		#print nome
-	
-pagina.close()
-arq = url+nome
-print "Baixando arquivo %s." %nome
-download = urllib.urlretrieve(arq,nome)
-print "Download Concluído"
+    DATA_SUS_URL = "ftp://arpoador.datasus.gov.br/"
+    BPA_URL = "".join([DATA_SUS_URL, "siasus/BPA/"])
+
+    try:
+        pagina = urllib.request.urlopen(BPA_URL)
+
+        for linha in pagina:
+            linha = linha.decode('utf-8')
+            if "exe" in linha:
+                tmp = linha.split()
+                nome = tmp[3]
+
+        pagina.close()
+        arq = BPA_URL + nome
+        print(f"Baixando arquivo {nome}")
+        urllib.request.urlretrieve(arq, nome)
+        print("Download Concluído")
+ 
+    except Exception as e:
+        print(f"Erro: {e}")
