@@ -1,40 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Script para download arquivo kit bpa
-# Author: H. Antunes
-# Ano: 2016
-# Revisao: 2.0 
-#
 
-import urllib, urllib2
 
-url = "ftp://arpoador.datasus.gov.br/siasus/sia/"
+import urllib.request as request
+import urllib.error as error
 
-try:
-	site = urllib2.urlopen(url)
-	versoes = []
-	for linha in site:
-		if linha.find("exe")!= -1:
-			tmp = linha.split()
-			versao = tmp[3]
-			versoes.append(versao)
-	#print versoes[-2]
-	text = versoes[-2]
-	arq = url + text
-	print "Baixando  ...%s" % text
-	download =  urllib.urlretrieve(arq, text)
-	print "Download concluido"
-	print "Arquivo %s salvo no diretorio atual." % text
-	site.close()
+DATA_SUS_URL = "ftp://arpoador.datasus.gov.br/"
+SIA_URL = "".join([DATA_SUS_URL, "siasus/sia/"])
+
+if __name__ == "__main__":
+	try:
+		site = request.urlopen(SIA_URL)
+		versoes = []
+		for linha in site:
+			decoded_linha = linha.decode("utf-8")
+			if "exe" in decoded_linha:
+				tmp = decoded_linha.split()
+				versao = tmp[3]
+				versoes.append(versao)
+		text = versoes[-2]
+		arq = SIA_URL + text
+		print(f"Baixando  ...{text}")
+		download = request.urlretrieve(arq, text)
+		print("Download concluido")
+		print(f"Arquivo {text} salvo no diretorio atual.")
+		site.close()
 
 		
-except:
-	print 35*"x"
-	print '---ERRO NA ABERTURA DA PAGINA---'
-	print 35*"x"
+	except error.URLError as e:
+		print(35*"x")
+		print("---ERRO NA ABERTURA DA PAGINA---")
+		print(f"Erro: {e}")
+		print(35*"x")
 	
-
-print ""
-print '\t----- FIM -----'
-
+	print()
+	print("\t----- FIM -----")
